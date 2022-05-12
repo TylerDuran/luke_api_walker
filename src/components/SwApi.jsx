@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Form from './Form';
-import { useParams } from 'react-router-dom';
+import Error from './Error';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const SwApi = (props) => {
 
     const [responseObj, setResponseObj] = useState(null);
 
+    const navigate = useNavigate()
 
     const { personID, selectedStar } = useParams();
     console.log(personID);
@@ -17,14 +19,16 @@ const SwApi = (props) => {
                 console.log(res.data);
                 setResponseObj(res.data);
             })
-            .catch(err => console.log(err))
+            .catch( err => {
+                console.log(err)
+                navigate("/error")
+            })
     }, [selectedStar, personID])
 
 
 
     return (
         <div>
-            <Form/>
             {
                 selectedStar === "people" ? (
                     responseObj ? (
