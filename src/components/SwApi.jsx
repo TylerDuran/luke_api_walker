@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Form from './Form';
-import Error from './Error';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const SwApi = (props) => {
@@ -21,7 +19,7 @@ const SwApi = (props) => {
             })
             .catch( err => {
                 console.log(err)
-                navigate("/error")
+                navigate("/error", {replace: true})
             })
     }, [selectedStar, personID])
 
